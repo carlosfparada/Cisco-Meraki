@@ -9,10 +9,18 @@
   
   - include_vars: main.yml
 
-  - name: Query DNAC Sites
-    cisco.meraki.xxx:
-      dxxx
+  - name: Query Cisco Meraki Firewall services
+    meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: no
+      auth_key: 56d3a622d86ebf3941263f91902508126a22492f
+      state: query
+      org_name: "DevNet Sandbox"
+      net_name: YourNet
+      service: ICMP
+    delegate_to: localhost
 
-  - name: Debug Meraki
-    debug:
-      var: _?
+
+  # - name: Debug Meraki
+  #   debug:
+  #     var: _?

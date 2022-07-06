@@ -1,6 +1,6 @@
 ---
 
-# dnac_host: "sandboxdnac2.cisco.com"
+meraki_host: "n149.meraki.com"
 # dnac_username: "devnetuser"
 # dnac_password: "Cisco123!"
 # dnac_verify: no
