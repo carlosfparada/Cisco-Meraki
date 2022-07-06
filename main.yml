@@ -16,7 +16,7 @@
       auth_key: "{{ auth_key }}"
       state: query
       org_name: "{{ org_name }}"
-      net_name: YourNet
+      net_name: "{{ net_name }}"
       service: ICMP
     delegate_to: localhost
 
