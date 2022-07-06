@@ -1,10 +1,8 @@
 ---
 
+#meraki_host: "api.meraki.com"
 meraki_host: "n149.meraki.com"
-# dnac_username: "devnetuser"
-# dnac_password: "Cisco123!"
-# dnac_verify: no
-# dnac_port: 443
-# dnac_version: "2.2.3.3"
-# dnac_debug: yes
+validate_certs: no
+auth_key: 56d3a622d86ebf3941263f91902508126a22492f
+org_name: "DevNet Sandbox"
 

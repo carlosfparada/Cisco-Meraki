@@ -12,10 +12,10 @@
   - name: Query Cisco Meraki Firewall services
     meraki_firewalled_services:
       host: "{{ meraki_host }}"
-      validate_certs: no
-      auth_key: 56d3a622d86ebf3941263f91902508126a22492f
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
       state: query
-      org_name: "DevNet Sandbox"
+      org_name: "{{ org_name }}"
       net_name: YourNet
       service: ICMP
     delegate_to: localhost
