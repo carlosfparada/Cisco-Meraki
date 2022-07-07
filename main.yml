@@ -34,8 +34,7 @@
       serial: "{{ serial }}"
       state: present
     #delegate_to: localhost
-    register: _devices
-
+    
 
   # - name: Query Cisco Meraki Firewall services
   #   meraki_firewalled_services:
