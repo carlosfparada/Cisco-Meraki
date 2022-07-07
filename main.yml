@@ -17,23 +17,46 @@
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: query
-    #delegate_to: localhost
     register: _devices
 
   - name: Debug devices
     debug: 
       var: _devices
 
-  - name: Add Cisco Meraki device into a network
-    meraki_device:
+  # - name: Add Cisco Meraki device into a network
+  #   meraki_device:
+  #     host: "{{ meraki_host }}"
+  #     validate_certs: "{{ validate_certs }}"
+  #     auth_key: "{{ auth_key }}"
+  #     org_name: "{{ org_name }}"
+  #     net_name: "{{ net_name }}"
+  #     serial: "{{ device_serial }}"
+  #     state: present
+
+  - name: Query Cisco Meraki wireless (MR) SSID
+    meraki_mr_ssid:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       serial: "{{ device_serial }}"
+      state: query
+
+  - name: Change and activate Cisco Meraki wireless (MR) SSID
+    meraki_mr_ssid:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "{{ device_serial }}"
+      name: "{{ wireless_ssid }}"
+      enabled: true
       state: present
-    #delegate_to: localhost
+    delegate_to: localhost
+
+
 
 
   # - name: Query Cisco Meraki Firewall services

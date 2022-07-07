@@ -8,3 +8,5 @@ org_name: "DevNet Sandbox"
 net_name: "DNENT2-cxxxxxxaredhat.com"
 
 device_serial: "Q2AT-Z8Q8-7TPH"
+
+wireless_ssid: "MYSSID"
