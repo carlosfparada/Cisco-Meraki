@@ -24,17 +24,17 @@
     debug: 
       var: _devices
 
-  - name: Add Cisco Meraki device into network
+  - name: Add Cisco Meraki device into a network
     meraki_device:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
-      serial: "{{ serial }}"
+      serial: "{{ device_serial }}"
       state: present
     #delegate_to: localhost
-    
+
 
   # - name: Query Cisco Meraki Firewall services
   #   meraki_firewalled_services:
