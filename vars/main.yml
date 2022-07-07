@@ -3,7 +3,7 @@
 #meraki_host: "api.meraki.com"
 meraki_host: "n149.meraki.com"
 validate_certs: no
-auth_key: 56d3a622d86ebf3941263f91902508126a22492f
+auth_key: "b18e2810c43602a82e4a7c72db1bb9e410648e2d"
 org_name: "DevNet Sandbox"
-net_name: "CLUS-22"
+net_name: "DNENT2-cxxxxxxaredhat.com"
 
