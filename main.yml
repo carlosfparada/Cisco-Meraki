@@ -20,6 +20,23 @@
     #delegate_to: localhost
     register: _devices
 
+  - name: Debug devices
+    debug: 
+      var: _devices
+
+  - name: Add Cisco Meraki device into network
+    meraki_device:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "{{ serial }}"
+      state: present
+    #delegate_to: localhost
+    register: _devices
+
+
   # - name: Query Cisco Meraki Firewall services
   #   meraki_firewalled_services:
   #     host: "{{ meraki_host }}"
