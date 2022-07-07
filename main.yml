@@ -42,6 +42,11 @@
       net_name: "{{ net_name }}"
       serial: "{{ device_serial }}"
       state: query
+    register: _ssid
+
+  - name: Debug SSID
+    debug: 
+      var: _ssid
 
   - name: Change and activate Cisco Meraki wireless (MR) SSID
     meraki_mr_ssid:
