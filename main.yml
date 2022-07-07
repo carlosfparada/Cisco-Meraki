@@ -9,16 +9,27 @@
   
   - include_vars: main.yml
 
-  - name: Query Cisco Meraki Firewall services
-    meraki_firewalled_services:
+  - name: Query Cisco Meraki devices
+    meraki_device:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
-      state: query
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
-      service: ICMP
+      state: query
     delegate_to: localhost
+
+
+  # - name: Query Cisco Meraki Firewall services
+  #   meraki_firewalled_services:
+  #     host: "{{ meraki_host }}"
+  #     validate_certs: "{{ validate_certs }}"
+  #     auth_key: "{{ auth_key }}"
+  #     org_name: "{{ org_name }}"
+  #     net_name: "{{ net_name }}"
+  #     state: query
+  #     service: ICMP
+  #   delegate_to: localhost
 
 
   # - name: Debug Meraki
