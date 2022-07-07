@@ -17,8 +17,8 @@
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: query
-    delegate_to: localhost
-
+    #delegate_to: localhost
+    register: _devices
 
   # - name: Query Cisco Meraki Firewall services
   #   meraki_firewalled_services:
