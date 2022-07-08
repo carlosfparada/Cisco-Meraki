@@ -60,7 +60,7 @@
       state: query
 
   # rules
-  - name: Query Cisco Meraki Firewall rule
+  - name: Query Cisco Meraki Firewall MR rule
     meraki_mr_l3_firewall:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
@@ -70,7 +70,7 @@
       number: 1
       state: query
 
-  - name: Allow Cisco Meraki Firewall rule
+  - name: Allow Cisco Meraki Firewall MR rule
     meraki_mr_l3_firewall:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
@@ -86,6 +86,31 @@
           dest_port: 80
           dest_cidr: 192.168.1.0/24
 
+  - name: Query Cisco Meraki Firewall MX rule
+    meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      number: 1
+      state: query
+
+  - name: Allow Cisco Meraki Firewall MX rule
+    meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      number: 1
+      rules:
+        - comment: test rule
+          policy: allow
+          protocol: tcp
+          dest_port: 80
+          dest_cidr: 192.168.2.0/24
 
   # - name: Query Cisco Meraki wireless (MR) SSID
   #   meraki_mr_ssid:
