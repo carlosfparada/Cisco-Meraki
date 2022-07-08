@@ -209,7 +209,7 @@
   #     vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
-    meraki_switch_access_list:
+    meraki_ms_access_list:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
