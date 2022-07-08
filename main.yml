@@ -113,7 +113,7 @@
           dest_cidr: 192.168.2.0/24
 
   - name: Set Cisco Meraki MS port with VLAN access
-    meraki_mx_l3_firewall:
+    meraki_switchport:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -128,7 +128,7 @@
       vlan: 10
 
   - name: Query Cisco Meraki MS ports
-    meraki_mx_l3_firewall:
+    meraki_switchport:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
