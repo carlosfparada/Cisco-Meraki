@@ -77,6 +77,7 @@
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: present
+      number: 1
       rules:
         - comment: test rule
           policy: allow
