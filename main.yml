@@ -34,8 +34,8 @@
       serial: "Q2MD-9PJD-E9L7"
       state: present
 
-# FIREWALL (MR, MX)
-  # services
+# Route/Policy (MX)
+  # firerwall services
   - name: Allow Cisco Meraki Firewall ICMP services
     meraki_firewalled_services:
       host: "{{ meraki_host }}"
@@ -59,33 +59,8 @@
       net_name: "{{ net_name }}"
       state: query
 
-  # rules MR
-  - name: Query Cisco Meraki Firewall MR rule
-    meraki_mr_l3_firewall:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      number: 1
-      state: query
 
-  - name: Allow Cisco Meraki Firewall MR rule
-    meraki_mr_l3_firewall:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      state: present
-      number: 1
-      rules:
-        - comment: test rule
-          policy: allow
-          protocol: tcp
-          dest_port: 80
-          dest_cidr: 192.168.1.0/24
-  # rules MX
+  # firewall rules
   - name: Query Cisco Meraki Firewall MX rule
     meraki_mx_l3_firewall:
       host: "{{ meraki_host }}"
@@ -112,6 +87,65 @@
           dest_port: 80
           dest_cidr: 192.168.2.0/24
 
+  # NAT
+  - name: Set Cisco Meraki NAT MX rule
+    meraki_nat:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      one_to_many:
+      - public_ip: 1.1.1.1
+        uplink: internet1
+        port_rules:
+          - name: Test rule
+            protocol: tcp
+            public_port: 10
+            local_ip: 192.168.0.1
+            local_port: 11
+            allowed_ips:
+              - any
+
+  - name: Query Cisco Meraki NAT MX rule
+    meraki_nat:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+
+# ACCESS POINTS (MR) 
+  # firewall rules
+  - name: Query Cisco Meraki Firewall MR rule
+    meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      number: 1
+      state: query
+
+  - name: Allow Cisco Meraki Firewall MR rule
+    meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      number: 1
+      rules:
+        - comment: test rule
+          policy: allow
+          protocol: tcp
+          dest_port: 80
+          dest_cidr: 192.168.1.0/24
+
+# SWITCH (MS)
   - name: Set Cisco Meraki MS port with VLAN access
     meraki_switchport:
       host: "{{ meraki_host }}"
