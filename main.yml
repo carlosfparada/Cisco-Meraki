@@ -23,30 +23,30 @@
     debug: 
       var: _devices
 
-  # - name: Add Cisco Meraki device into a network
-  #   meraki_device:
-  #     host: "{{ meraki_host }}"
-  #     validate_certs: "{{ validate_certs }}"
-  #     auth_key: "{{ auth_key }}"
-  #     org_name: "{{ org_name }}"
-  #     net_name: "{{ net_name }}"
-  #     serial: "{{ device_serial }}"
-  #     state: present
+  - name: Add Cisco Meraki device into a network
+    meraki_device:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "{{ device_serial }}"
+      state: present
 
-  # - name: Query Cisco Meraki wireless (MR) SSID
-  #   meraki_mr_ssid:
-  #     host: "{{ meraki_host }}"
-  #     validate_certs: "{{ validate_certs }}"
-  #     auth_key: "{{ auth_key }}"
-  #     org_name: "{{ org_name }}"
-  #     net_name: "{{ net_name }}"
-  #     serial: "{{ device_serial }}"
-  #     state: query
-  #   register: _ssid
+  - name: Query Cisco Meraki wireless (MR) SSID
+    meraki_mr_ssid:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "{{ device_serial }}"
+      state: query
+    register: _ssid
 
-  # - name: Debug SSID
-  #   debug: 
-  #     var: _ssid
+  - name: Debug SSID
+    debug: 
+      var: _ssid
 
   # - name: Change and activate Cisco Meraki wireless (MR) SSID
   #   meraki_mr_ssid:
