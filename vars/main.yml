@@ -3,9 +3,9 @@
 #meraki_host: "api.meraki.com"
 meraki_host: "n149.meraki.com"
 validate_certs: no
-auth_key: "b18e2810c43602a82e4a7c72db1bb9e410648e2d"
+auth_key: "6fe99cad0a3444a6ada7eab04e759e58958ac5fd"
 org_name: "DevNet Sandbox"
-net_name: "DNENT2-cxxxxxxaredhat.com"
+net_name: "DNSMB5-cxxxxxxxaredhat.com"
 
 device_serial: "Q2AT-Z8Q8-7TPH"
 
