@@ -93,7 +93,6 @@
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
-      number: 1
       state: query
 
   - name: Allow Cisco Meraki Firewall MX rule
@@ -104,7 +103,6 @@
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: present
-      number: 1
       rules:
         - comment: test rule
           policy: allow
