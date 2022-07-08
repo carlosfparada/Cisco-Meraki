@@ -209,7 +209,7 @@
       vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
-    cisco.meraki.meraki_ms_access_list:
+    cisco.meraki.meraki_ms_l3_interface:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -222,3 +222,35 @@
     debug: 
       var: _l3_interfaces
 
+  # Access List
+  - name: Set Cisco Meraki MS Access List
+    cisco.meraki.meraki_ms_access_list:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      rules:
+        - comment: Fake rule
+          policy: allow
+          ip_version: ipv4
+          protocol: udp
+          src_cidr: 192.0.1.0/24
+          src_port: "4242"
+          dst_cidr: 1.2.3.4/32
+          dst_port: "80"
+          vlan: "100"
+
+  - name: Query Cisco Meraki MS Access Lists
+    cisco.meraki.meraki_ms_access_list:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _access_lists
+
+  - name: Debug access_lists
+    debug: 
+      var: _access_lists
