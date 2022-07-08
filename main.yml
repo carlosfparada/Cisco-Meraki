@@ -9,6 +9,7 @@
   
   - include_vars: main.yml
 
+# DEVICES
   - name: Query Cisco Meraki devices
     meraki_device:
       host: "{{ meraki_host }}"
@@ -32,6 +33,31 @@
       net_name: "{{ net_name }}"
       serial: "{{ device_serial }}"
       state: present
+
+# FIREWALL
+  - name: Query Cisco Meraki Firewall services
+    meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+
+  - name: Allow Cisco Meraki Firewall ICMP services
+    meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      access: restricted
+      service: ICMP
+      allowed_ips:
+        - 192.0.1.1
+        - 192.0.1.2
+
 
   # - name: Query Cisco Meraki wireless (MR) SSID
   #   meraki_mr_ssid:
@@ -61,32 +87,3 @@
   #     state: present
   #   delegate_to: localhost
 
-
-
-  - name: Query Cisco Meraki Firewall services
-    meraki_firewalled_services:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      state: query
-
-  - name: Allow Cisco Meraki Firewall ICMP services
-    meraki_firewalled_services:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      state: present
-      access: restricted
-      service: ICMP
-      allowed_ips:
-        - 192.0.1.1
-        - 192.0.1.2
-
-
-  # - name: Debug Meraki
-  #   debug:
-  #     var: _?
