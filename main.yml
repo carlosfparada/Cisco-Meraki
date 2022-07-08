@@ -118,7 +118,6 @@
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
       serial: "Q2GW-2CPC-JCYZ"
       state: present
       number: 7
@@ -133,7 +132,6 @@
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
       serial: "Q2GW-2CPC-JCYZ"
       state: query
 
