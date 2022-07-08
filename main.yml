@@ -196,7 +196,7 @@
 
   # L3 interface
   - name: Set Cisco Meraki MS L3 Interface
-    meraki_ms_l3_interface:
+    cisco.meraki.meraki_ms_l3_interface:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -209,7 +209,7 @@
       vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
-    meraki_ms_access_list:
+    cisco.meraki.meraki_ms_access_list:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
