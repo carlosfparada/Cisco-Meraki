@@ -163,7 +163,9 @@
   - name: Debug fw_mr
     debug: 
       var: _fw_mr
-     
+
+
+
 # SWITCH (MS)
   # Port/VLAN
   - name: Set Cisco Meraki MS port with VLAN access
@@ -231,6 +233,7 @@
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
+      state: present
       rules:
         - comment: Fake rule
           policy: allow
