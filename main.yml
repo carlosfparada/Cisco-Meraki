@@ -9,7 +9,7 @@
   
   - include_vars: main.yml
 
-# DEVICES
+# DEVICES (Network)
   - name: Query Cisco Meraki devices
     meraki_device:
       host: "{{ meraki_host }}"
@@ -31,10 +31,10 @@
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
-      serial: "{{ device_serial }}"
+      serial: "Q2MD-9PJD-E9L7"
       state: present
 
-# FIREWALL
+# FIREWALL (MR, MX)
   # services
   - name: Allow Cisco Meraki Firewall ICMP services
     meraki_firewalled_services:
@@ -59,7 +59,7 @@
       net_name: "{{ net_name }}"
       state: query
 
-  # rules
+  # rules MR
   - name: Query Cisco Meraki Firewall MR rule
     meraki_mr_l3_firewall:
       host: "{{ meraki_host }}"
@@ -85,7 +85,7 @@
           protocol: tcp
           dest_port: 80
           dest_cidr: 192.168.1.0/24
-
+  # rules MX
   - name: Query Cisco Meraki Firewall MX rule
     meraki_mx_l3_firewall:
       host: "{{ meraki_host }}"
@@ -112,6 +112,31 @@
           dest_port: 80
           dest_cidr: 192.168.2.0/24
 
+  - name: Set Cisco Meraki MS port with VLAN access
+    meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: present
+      number: 7
+      enabled: true
+      name: Test Port
+      type: access
+      vlan: 10
+
+  - name: Query Cisco Meraki MS ports
+    meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: query
+
   # - name: Query Cisco Meraki wireless (MR) SSID
   #   meraki_mr_ssid:
   #     host: "{{ meraki_host }}"
@@ -134,7 +159,7 @@
   #     auth_key: "{{ auth_key }}"
   #     org_name: "{{ org_name }}"
   #     net_name: "{{ net_name }}"
-  #     serial: "{{ device_serial }}"
+  #     serial: "?"
   #     name: "{{ wireless_ssid }}"
   #     enabled: true
   #     state: present

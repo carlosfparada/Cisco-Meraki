@@ -6,7 +6,3 @@ validate_certs: no
 auth_key: "6fe99cad0a3444a6ada7eab04e759e58958ac5fd"
 org_name: "DevNet Sandbox"
 net_name: "DNSMB5-cxxxxxxxaredhat.com"
-
-device_serial: "Q2MD-9PJD-E9L7"
-
-wireless_ssid: "MYSSID"
