@@ -58,18 +58,13 @@
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: query
+    register: _fw_services
 
+  - name: Debug fw_services
+    debug: 
+      var: _fw_services
 
   # firewall rules
-  - name: Query Cisco Meraki Firewall MX rule
-    meraki_mx_l3_firewall:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      state: query
-
   - name: Allow Cisco Meraki Firewall MX rule
     meraki_mx_l3_firewall:
       host: "{{ meraki_host }}"
@@ -86,6 +81,20 @@
           src_cidr: any
           dest_port: 80
           dest_cidr: 192.168.2.0/24
+
+  - name: Query Cisco Meraki Firewall MX rule
+    meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _fw_mx
+
+  - name: Debug fw_mx
+    debug: 
+      var: _fw_mx
 
   # NAT
   - name: Set Cisco Meraki NAT MX rule
@@ -115,20 +124,15 @@
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
-      state: present
+      state: query
+    register: _nat_mx
 
+  - name: Debug nat_mx
+    debug: 
+      var: _nat_mx
+      
 # ACCESS POINTS (MR) 
   # firewall rules
-  - name: Query Cisco Meraki Firewall MR rule
-    meraki_mr_l3_firewall:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      number: 1
-      state: query
-
   - name: Allow Cisco Meraki Firewall MR rule
     meraki_mr_l3_firewall:
       host: "{{ meraki_host }}"
@@ -145,6 +149,21 @@
           dest_port: 80
           dest_cidr: 192.168.1.0/24
 
+  - name: Query Cisco Meraki Firewall MR rule
+    meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      number: 1
+      state: query
+    register: _fw_mr
+
+  - name: Debug fw_mr
+    debug: 
+      var: _fw_mr
+     
 # SWITCH (MS)
   - name: Set Cisco Meraki MS port with VLAN access
     meraki_switchport:
@@ -168,7 +187,12 @@
       org_name: "{{ org_name }}"
       serial: "Q2GW-2CPC-JCYZ"
       state: query
+    register: _ports_ms
 
+  - name: Debug ports_ms
+    debug: 
+      var: _ports_ms
+     
   # - name: Query Cisco Meraki wireless (MR) SSID
   #   meraki_mr_ssid:
   #     host: "{{ meraki_host }}"
