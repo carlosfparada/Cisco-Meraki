@@ -165,6 +165,7 @@
       var: _fw_mr
      
 # SWITCH (MS)
+  # Port/VLAN
   - name: Set Cisco Meraki MS port with VLAN access
     meraki_switchport:
       host: "{{ meraki_host }}"
@@ -192,32 +193,32 @@
   - name: Debug ports_ms
     debug: 
       var: _ports_ms
-     
-  # - name: Query Cisco Meraki wireless (MR) SSID
-  #   meraki_mr_ssid:
-  #     host: "{{ meraki_host }}"
-  #     validate_certs: "{{ validate_certs }}"
-  #     auth_key: "{{ auth_key }}"
-  #     org_name: "{{ org_name }}"
-  #     net_name: "{{ net_name }}"
-  #     serial: "{{ device_serial }}"
-  #     state: query
-  #   register: _ssid
 
-  # - name: Debug SSID
-  #   debug: 
-  #     var: _ssid
+  # L3 interface
+  - name: Set Cisco Meraki MS L3 Interface
+    meraki_ms_l3_interface:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: present
+      name: "Test L3 interface 2"
+      subnet: "192.168.3.0/24"
+      interface_ip: "192.168.3.2"
+      vlan_id: 11
 
-  # - name: Change and activate Cisco Meraki wireless (MR) SSID
-  #   meraki_mr_ssid:
-  #     host: "{{ meraki_host }}"
-  #     validate_certs: "{{ validate_certs }}"
-  #     auth_key: "{{ auth_key }}"
-  #     org_name: "{{ org_name }}"
-  #     net_name: "{{ net_name }}"
-  #     serial: "?"
-  #     name: "{{ wireless_ssid }}"
-  #     enabled: true
-  #     state: present
-  #   delegate_to: localhost
+  - name: Query Cisco Meraki MS L3 Interfaces
+    meraki_ms_l3_interface:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: query
+    register: _l3_interfaces
+
+  - name: Debug l3_interfaces
+    debug: 
+      var: _l3_interfaces
 
