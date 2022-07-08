@@ -206,6 +206,7 @@
       name: "Test L3 interface 2"
       subnet: "192.168.3.0/24"
       interface_ip: "192.168.3.2"
+      default_gateway: "192.168.3.1"
       vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
