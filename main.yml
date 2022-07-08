@@ -63,7 +63,6 @@
 
 
 
-
   - name: Query Cisco Meraki Firewall services
     meraki_firewalled_services:
       host: "{{ meraki_host }}"
@@ -72,8 +71,20 @@
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: query
+
+  - name: Allow Cisco Meraki Firewall ICMP services
+    meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      access: restricted
       service: ICMP
-    delegate_to: localhost
+      allowed_ips:
+        - 192.0.1.1
+        - 192.0.1.2
 
 
   # - name: Debug Meraki
