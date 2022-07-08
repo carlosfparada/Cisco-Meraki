@@ -67,6 +67,7 @@
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
+      number: 1
       state: query
 
   - name: Allow Cisco Meraki Firewall rule
