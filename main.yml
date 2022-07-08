@@ -195,18 +195,18 @@
       var: _ports_ms
 
   # L3 interface
-  # - name: Set Cisco Meraki MS L3 Interface
-  #   meraki_switch_l3_interface:
-  #     host: "{{ meraki_host }}"
-  #     validate_certs: "{{ validate_certs }}"
-  #     auth_key: "{{ auth_key }}"
-  #     org_name: "{{ org_name }}"
-  #     serial: "Q2GW-2CPC-JCYZ"
-  #     state: present
-  #     name: "Test L3 interface 2"
-  #     subnet: "192.168.3.0/24"
-  #     interface_ip: "192.168.3.2"
-  #     vlan_id: 11
+  - name: Set Cisco Meraki MS L3 Interface
+    meraki_ms_l3_interface:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: present
+      name: "Test L3 interface 2"
+      subnet: "192.168.3.0/24"
+      interface_ip: "192.168.3.2"
+      vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
     meraki_ms_access_list:
