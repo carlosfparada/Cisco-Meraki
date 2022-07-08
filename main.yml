@@ -107,6 +107,8 @@
         - comment: test rule
           policy: allow
           protocol: tcp
+          src_port: any
+          src_cidr: any
           dest_port: 80
           dest_cidr: 192.168.2.0/24
 
