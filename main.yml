@@ -35,15 +35,7 @@
       state: present
 
 # FIREWALL
-  - name: Query Cisco Meraki Firewall services
-    meraki_firewalled_services:
-      host: "{{ meraki_host }}"
-      validate_certs: "{{ validate_certs }}"
-      auth_key: "{{ auth_key }}"
-      org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
-      state: query
-
+  # services
   - name: Allow Cisco Meraki Firewall ICMP services
     meraki_firewalled_services:
       host: "{{ meraki_host }}"
@@ -57,6 +49,40 @@
       allowed_ips:
         - 192.0.1.1
         - 192.0.1.2
+
+  - name: Query Cisco Meraki Firewall services
+    meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+
+  # rules
+  - name: Query Cisco Meraki Firewall rule
+    meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+
+  - name: Allow Cisco Meraki Firewall rule
+    meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      rules:
+        - comment: test rule
+          policy: allow
+          protocol: tcp
+          dest_port: 80
+          dest_cidr: 192.168.1.0/24
 
 
   # - name: Query Cisco Meraki wireless (MR) SSID
