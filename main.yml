@@ -166,7 +166,7 @@
 
   # SSID
   - name: Set Cisco Meraki MR SSID
-    cisco.meraki.meraki_ms_access_list:
+    cisco.meraki.meraki_mr_ssid:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -177,7 +177,7 @@
       enabled: true
 
   - name: Query Cisco Meraki MR SSIDs
-    cisco.meraki.meraki_ms_access_list:
+    cisco.meraki.meraki_mr_ssid:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
