@@ -51,7 +51,7 @@
         - 192.0.1.2
 
   - name: Query Cisco Meraki Firewall services
-    cisco.meraki.meraki_firewalled_services:
+    cisco.meraki.networks_appliance_firewall_firewalled_services:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
