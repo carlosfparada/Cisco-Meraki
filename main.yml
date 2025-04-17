@@ -4,12 +4,14 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  vars_files: main.yml
+  
   tasks:
-  # Deploy sandbox environment https://devnetsandbox.cisco.com/DevNet
-  # DEVICES (Network)
+  
+  - include_vars: main.yml
+
+# DEVICES (Network)
   - name: Query Cisco Meraki devices
-    cisco.meraki.meraki_device:
+    meraki_device:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -23,7 +25,7 @@
       var: _devices
 
   - name: Add Cisco Meraki device into a network
-    cisco.meraki.meraki_device:
+    meraki_device:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -31,12 +33,11 @@
       net_name: "{{ net_name }}"
       serial: "Q2MD-9PJD-E9L7"
       state: present
-    ignore_errors: true
 
 # Route/Policy (MX)
   # firerwall services
   - name: Allow Cisco Meraki Firewall ICMP services
-    cisco.meraki.networks_appliance_firewall_firewalled_services:
+    meraki_firewalled_services:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -50,7 +51,7 @@
         - 192.0.1.2
 
   - name: Query Cisco Meraki Firewall services
-    cisco.meraki.networks_appliance_firewall_firewalled_services:
+    meraki_firewalled_services:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -65,7 +66,7 @@
 
   # firewall rules
   - name: Allow Cisco Meraki Firewall MX rule
-    cisco.meraki.networks_appliance_firewall_l3_firewall_rules:
+    meraki_mx_l3_firewall:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -82,7 +83,7 @@
           dest_cidr: 192.168.2.0/24
 
   - name: Query Cisco Meraki Firewall MX rule
-    cisco.meraki.networks_appliance_firewall_l3_firewall_rules:
+    meraki_mx_l3_firewall:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -97,7 +98,7 @@
 
   # NAT
   - name: Set Cisco Meraki NAT MX rule
-    cisco.meraki.networks_appliance_firewall_one_to_many_nat_rules:
+    meraki_nat:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -117,7 +118,7 @@
               - any
 
   - name: Query Cisco Meraki NAT MX rule
-    cisco.meraki.networks_appliance_firewall_one_to_many_nat_rules:
+    meraki_nat:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -133,7 +134,7 @@
 # ACCESS POINTS (MR) 
   # firewall rules
   - name: Allow Cisco Meraki Firewall MR rule
-    cisco.meraki.networks_appliance_firewall_l3_firewall_rules:
+    meraki_mr_l3_firewall:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -149,7 +150,7 @@
           dest_cidr: 192.168.1.0/24
 
   - name: Query Cisco Meraki Firewall MR rule
-    cisco.meraki.networks_appliance_firewall_l3_firewall_rules:
+    meraki_mr_l3_firewall:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -165,7 +166,7 @@
 
   # SSID
   - name: Set Cisco Meraki MR SSID
-    cisco.meraki.networks_wireless_ssids:
+    cisco.meraki.meraki_mr_ssid:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -175,24 +176,24 @@
       name: MySSID
       enabled: true
 
-  - name: Query Cisco Meraki SSIDs
-    cisco.meraki.networks_wireless_ssids:
+  - name: Query Cisco Meraki MR SSIDs
+    cisco.meraki.meraki_mr_ssid:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: query
-    register: _ssid
+    register: _ssid_mr
 
-  - name: Debug ssid
+  - name: Debug ssid_mr
     debug: 
-      var: _ssid
+      var: _ssid_mr
 
 # SWITCH (MS)
   # Port/VLAN
   - name: Set Cisco Meraki MS port with VLAN access
-    cisco.meraki.devices_switch_ports:
+    meraki_switchport:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -206,7 +207,7 @@
       vlan: 10
 
   - name: Query Cisco Meraki MS ports
-    cisco.meraki.devices_switch_ports:
+    meraki_switchport:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -221,7 +222,7 @@
 
   # L3 interface
   - name: Set Cisco Meraki MS L3 Interface
-    cisco.meraki.devices_switch_routing_interfaces:
+    cisco.meraki.meraki_ms_l3_interface:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -235,7 +236,7 @@
       vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
-    cisco.meraki.devices_switch_routing_interfaces:
+    cisco.meraki.meraki_ms_l3_interface:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -250,7 +251,7 @@
 
   # Access List
   - name: Set Cisco Meraki MS Access List
-    cisco.meraki.networks_switch_access_control_lists:
+    cisco.meraki.meraki_ms_access_list:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -269,7 +270,7 @@
           vlan: "100"
 
   - name: Query Cisco Meraki MS Access Lists
-    cisco.meraki.networks_switch_access_control_lists:
+    cisco.meraki.meraki_ms_access_list:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
