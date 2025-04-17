@@ -176,19 +176,19 @@
       name: MySSID
       enabled: true
 
-  - name: Query Cisco Meraki MR SSIDs
-    cisco.meraki.meraki_mr_ssid:
+  - name: Query Cisco Meraki SSIDs
+    cisco.meraki.networks_wireless_ssids:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
       state: query
-    register: _ssid_mr
+    register: _ssid
 
-  - name: Debug ssid_mr
+  - name: Debug ssid
     debug: 
-      var: _ssid_mr
+      var: _ssid
 
 # SWITCH (MS)
   # Port/VLAN
@@ -222,7 +222,7 @@
 
   # L3 interface
   - name: Set Cisco Meraki MS L3 Interface
-    cisco.meraki.meraki_ms_l3_interface:
+    cisco.meraki.devices_switch_routing_interfaces:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -236,7 +236,7 @@
       vlan_id: 11
 
   - name: Query Cisco Meraki MS L3 Interfaces
-    cisco.meraki.meraki_ms_l3_interface:
+    cisco.meraki.devices_switch_routing_interfaces:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -251,7 +251,7 @@
 
   # Access List
   - name: Set Cisco Meraki MS Access List
-    cisco.meraki.meraki_ms_access_list:
+    cisco.meraki.networks_switch_access_control_lists:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -270,7 +270,7 @@
           vlan: "100"
 
   - name: Query Cisco Meraki MS Access Lists
-    cisco.meraki.meraki_ms_access_list:
+    cisco.meraki.networks_switch_access_control_lists:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
