@@ -31,7 +31,7 @@
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
       net_name: "{{ net_name }}"
-      serial: "Q2MD-9PJD-E9L7"
+      serial: "{{ switch_serial }}"
       state: present
     ignore_errors: true
 
