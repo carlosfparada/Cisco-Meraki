@@ -98,7 +98,7 @@
 
   # NAT
   - name: Set Cisco Meraki NAT MX rule
-    cisco.meraki.meraki_mx_nat:
+    cisco.meraki.networks_appliance_firewall_one_to_many_nat_rules:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -118,7 +118,7 @@
               - any
 
   - name: Query Cisco Meraki NAT MX rule
-    cisco.meraki.meraki_mx_nat:
+    cisco.meraki.networks_appliance_firewall_one_to_many_nat_rules:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
