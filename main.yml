@@ -150,7 +150,7 @@
           dest_cidr: 192.168.1.0/24
 
   - name: Query Cisco Meraki Firewall MR rule
-    cisco.meraki.meraki_mr_l3_firewall:
+    cisco.meraki.meraki_mr_l3_firewall
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -193,7 +193,7 @@
 # SWITCH (MS)
   # Port/VLAN
   - name: Set Cisco Meraki MS port with VLAN access
-    cisco.meraki.meraki_switchport:
+    cisco.meraki.meraki_ms_switchport:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -207,7 +207,7 @@
       vlan: 10
 
   - name: Query Cisco Meraki MS ports
-    cisco.meraki.meraki_switchport:
+    cisco.meraki.meraki_ms_switchport:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
