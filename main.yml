@@ -50,6 +50,7 @@
       allowed_ips:
         - 192.0.1.1
         - 192.0.1.2
+    ignore_errors: true
 
   - name: Query Cisco Meraki Firewall services
     cisco.meraki.meraki_firewalled_services:
