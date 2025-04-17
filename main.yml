@@ -37,7 +37,7 @@
 # Route/Policy (MX)
   # firerwall services
   - name: Allow Cisco Meraki Firewall ICMP services
-    cisco.meraki.meraki_firewalled_services:
+    cisco.meraki.networks_appliance_firewall_firewalled_services:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
@@ -134,7 +134,7 @@
 # ACCESS POINTS (MR) 
   # firewall rules
   - name: Allow Cisco Meraki Firewall MR rule
-    cisco.meraki.meraki_mr_l3_firewall:
+    cisco.meraki.networks_appliance_firewall_l3_firewall_rules:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
