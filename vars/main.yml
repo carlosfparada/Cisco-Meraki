@@ -3,6 +3,6 @@
 #meraki_host: "api.meraki.com"
 meraki_host: "n166.meraki.com"
 validate_certs: no
-auth_key: "891e970bc31efa29ff5fa77f2c506a4c61ad6318"
-org_name: "Red Hat"
-net_name: "Ansible-Net"
+auth_key: "6fe99cad0a3444a6ada7eab04e759e58958ac5fd"
+org_name: "DevNet Sandbox"
+net_name: "DNSMB5-cxxxxxxxaredhat.com"
