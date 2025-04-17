@@ -4,12 +4,10 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  
+  vars_files: main.yml
   tasks:
-  
-  - include_vars: main.yml
-
-# DEVICES (Network)
+  # Deploy sandbox environment https://devnetsandbox.cisco.com/DevNet
+  # DEVICES (Network)
   - name: Query Cisco Meraki devices
     cisco.meraki.meraki_device:
       host: "{{ meraki_host }}"
