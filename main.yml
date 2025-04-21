@@ -7,6 +7,19 @@
   vars_files: vars/main.yml
   tasks:
 
+# ORGANIZATIONS
+  - name: Query Cisco Meraki devices
+    cisco.meraki.meraki_organization:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      state: query
+    register: _organizations
+
+  - name: Debug organizations
+    ansible.builtin.debug: 
+      var: _organizations
+
 # DEVICES (Network)
   - name: Query Cisco Meraki devices
     cisco.meraki.meraki_device:
@@ -19,7 +32,7 @@
     register: _devices
 
   - name: Debug devices
-    debug: 
+    ansible.builtin.debug: 
       var: _devices
 
   - name: Add Cisco Meraki device into a network
@@ -62,7 +75,7 @@
     ignore_errors: true
 
   - name: Debug fw_services
-    debug: 
+    ansible.builtin.debug: 
       var: _fw_services
 
   # firewall rules
@@ -96,7 +109,7 @@
     ignore_errors: true
 
   - name: Debug fw_mx
-    debug: 
+    ansible.builtin.debug: 
       var: _fw_mx
 
   # NAT
@@ -133,7 +146,7 @@
     ignore_errors: true
 
   - name: Debug nat_mx
-    debug: 
+    ansible.builtin.debug: 
       var: _nat_mx
       
 # ACCESS POINTS (MR) 
@@ -168,7 +181,7 @@
     ignore_errors: true
 
   - name: Debug fw_mr
-    debug: 
+    ansible.builtin.debug: 
       var: _fw_mr
 
   # SSID
@@ -196,7 +209,7 @@
     ignore_errors: true
 
   - name: Debug ssid_mr
-    debug: 
+    ansible.builtin.debug: 
       var: _ssid_mr
 
 # SWITCH (MS)
@@ -228,7 +241,7 @@
     ignore_errors: true
 
   - name: Debug ports_ms
-    debug: 
+    ansible.builtin.debug: 
       var: _ports_ms
 
   # L3 interface
@@ -259,7 +272,7 @@
     ignore_errors: true
 
   - name: Debug l3_interfaces
-    debug: 
+    ansible.builtin.debug: 
       var: _l3_interfaces
 
   # Access List
@@ -295,5 +308,5 @@
     ignore_errors: true
 
   - name: Debug access_lists
-    debug: 
+    ansible.builtin.debug: 
       var: _access_lists
