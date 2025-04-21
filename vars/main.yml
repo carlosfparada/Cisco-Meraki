@@ -3,7 +3,7 @@
 #meraki_host: "api.meraki.com"
 meraki_host: "n149.meraki.com"
 validate_certs: no
-auth_key: "6fe99cad0a3444a6ada7eab04e759e58958ac5fd"
+auth_key: "2379ee7951ba4597cdd940ef858f64659cfb4ecb"
 org_name: "DevNet Sandbox"
 net_name: "DevNet Sandbox ALWAYS ON"
 switch_serial: "Q2MD-9PJD-E9L7"
