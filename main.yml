@@ -26,6 +26,7 @@
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
       state: query
     register: _networks
 
