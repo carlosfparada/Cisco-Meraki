@@ -1,7 +1,8 @@
 ---
 
-# meraki_host: "api.meraki.com"
-meraki_host: "n166.meraki.com"
+meraki_host: "api.meraki.com"
+# meraki_host: "n149.meraki.com"
+# meraki_host: "n166.meraki.com"
 validate_certs: no
 auth_key: "2379ee7951ba4597cdd940ef858f64659cfb4ecb"
 org_name: "DevNet Sandbox"
