@@ -5,15 +5,15 @@ validate_certs: no
 # meraki_host: "api.meraki.com"
 
 # DevNet Sandbox Org
-meraki_host: "n149.meraki.com"
-org_name: "DevNet Sandbox"
-net_name: "DevNet Sandbox ALWAYS ON"
-switch_serial: "Q2MD-9PJD-E9L7"
-wireless_serial: "Q2MD-BHHS-5FDL"
+# meraki_host: "n149.meraki.com"
+# org_name: "DevNet Sandbox"
+# net_name: "DevNet Sandbox ALWAYS ON"
+# switch_serial: "Q2MD-9PJD-E9L7"
+# wireless_serial: "Q2MD-BHHS-5FDL"
 
 # Red Hat Org
-# meraki_host: "n166.meraki.com"
-# org_name: "Red Hat"
-# net_name: "Ansible-Net"
-# net_name: "Acme-Office"
-# net_name: "Acme-Branch"
+meraki_host: "n166.meraki.com"
+org_name: "Red Hat"
+net_name: "Ansible-Net"
+net_name: "Acme-Office"
+net_name: "Acme-Branch"
