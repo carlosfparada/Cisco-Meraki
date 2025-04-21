@@ -20,7 +20,7 @@
     ansible.builtin.debug: 
       var: _organizations
 
-# ORGANIZATIONS
+# NETWORKS
   - name: Query Cisco Meraki networks
     cisco.meraki.networks:
       host: "{{ meraki_host }}"
