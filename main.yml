@@ -58,7 +58,6 @@
       net_name: "{{ net_name }}"
       serial: "{{ switch_serial }}"
       state: present
-    ignore_errors: true
 
 # Route/Policy (MX)
   # firerwall services
@@ -75,7 +74,6 @@
       allowed_ips:
         - 192.0.1.1
         - 192.0.1.2
-    ignore_errors: true
 
   - name: Query Cisco Meraki Firewall services
     cisco.meraki.meraki_firewalled_services:
@@ -86,7 +84,6 @@
       net_name: "{{ net_name }}"
       state: query
     register: _fw_services
-    ignore_errors: true
 
   - name: Debug fw_services
     ansible.builtin.debug: 
@@ -109,7 +106,6 @@
           src_cidr: any
           dest_port: 80
           dest_cidr: 192.168.2.0/24
-    ignore_errors: true
 
   - name: Query Cisco Meraki Firewall MX rule
     cisco.meraki.meraki_mx_l3_firewall:
@@ -120,7 +116,6 @@
       net_name: "{{ net_name }}"
       state: query
     register: _fw_mx
-    ignore_errors: true
 
   - name: Debug fw_mx
     ansible.builtin.debug: 
@@ -146,7 +141,6 @@
             local_port: 11
             allowed_ips:
               - any
-    ignore_errors: true
 
   - name: Query Cisco Meraki NAT MX rule
     cisco.meraki.meraki_mx_nat:
@@ -157,7 +151,6 @@
       net_name: "{{ net_name }}"
       state: query
     register: _nat_mx
-    ignore_errors: true
 
   - name: Debug nat_mx
     ansible.builtin.debug: 
@@ -180,7 +173,6 @@
           protocol: tcp
           dest_port: 80
           dest_cidr: 192.168.1.0/24
-    ignore_errors: true
 
   - name: Query Cisco Meraki Firewall MR rule
     cisco.meraki.meraki_mr_l3_firewall:
@@ -192,7 +184,6 @@
       number: 1
       state: query
     register: _fw_mr
-    ignore_errors: true
 
   - name: Debug fw_mr
     ansible.builtin.debug: 
@@ -209,7 +200,6 @@
       state: present
       name: MySSID
       enabled: true
-    ignore_errors: true
 
   - name: Query Cisco Meraki MR SSIDs
     cisco.meraki.meraki_mr_ssid:
@@ -220,7 +210,6 @@
       net_name: "{{ net_name }}"
       state: query
     register: _ssid_mr
-    ignore_errors: true
 
   - name: Debug ssid_mr
     ansible.builtin.debug: 
@@ -241,7 +230,6 @@
       name: Test Port
       type: access
       vlan: 10
-    ignore_errors: true
 
   - name: Query Cisco Meraki MS ports
     cisco.meraki.meraki_ms_switchport:
@@ -252,7 +240,6 @@
       serial: "Q2GW-2CPC-JCYZ"
       state: query
     register: _ports_ms
-    ignore_errors: true
 
   - name: Debug ports_ms
     ansible.builtin.debug: 
@@ -272,7 +259,6 @@
       interface_ip: "192.168.3.2"
       default_gateway: "192.168.3.1"
       vlan_id: 11
-    ignore_errors: true
 
   - name: Query Cisco Meraki MS L3 Interfaces
     cisco.meraki.meraki_ms_l3_interface:
@@ -283,7 +269,6 @@
       serial: "Q2GW-2CPC-JCYZ"
       state: query
     register: _l3_interfaces
-    ignore_errors: true
 
   - name: Debug l3_interfaces
     ansible.builtin.debug: 
@@ -308,7 +293,6 @@
           dst_cidr: 1.2.3.4/32
           dst_port: "80"
           vlan: "100"
-    ignore_errors: true
 
   - name: Query Cisco Meraki MS Access Lists
     cisco.meraki.meraki_ms_access_list:
@@ -319,7 +303,6 @@
       net_name: "{{ net_name }}"
       state: query
     register: _access_lists
-    ignore_errors: true
 
   - name: Debug access_lists
     ansible.builtin.debug: 
