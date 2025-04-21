@@ -15,5 +15,5 @@ validate_certs: no
 meraki_host: "n166.meraki.com"
 org_name: "Red Hat"
 net_name: "Ansible-Net"
-net_name: "Acme-Office"
-net_name: "Acme-Branch"
+# net_name: "Acme-Office"
+# net_name: "Acme-Branch"
