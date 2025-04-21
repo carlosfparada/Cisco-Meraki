@@ -22,7 +22,7 @@
 
 # NETWORKS
   - name: Query Cisco Meraki networks
-    cisco.meraki.networks:
+    cisco.meraki.meraki_network:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
