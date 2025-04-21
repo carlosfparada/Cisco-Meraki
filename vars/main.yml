@@ -4,7 +4,8 @@
 meraki_host: "n149.meraki.com"
 validate_certs: no
 auth_key: "2379ee7951ba4597cdd940ef858f64659cfb4ecb"
-org_name: "DevNet Sandbox"
+# org_name: "DevNet Sandbox"
+org_name: "Red Hat"
 net_name: "DevNet Sandbox ALWAYS ON"
 switch_serial: "Q2MD-9PJD-E9L7"
 wireless_serial: "Q2MD-BHHS-5FDL"
