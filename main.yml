@@ -20,6 +20,19 @@
     ansible.builtin.debug: 
       var: _organizations
 
+# ORGANIZATIONS
+  - name: Query Cisco Meraki networks
+    cisco.meraki.networks:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      state: query
+    register: _networks
+
+  - name: Debug networks
+    ansible.builtin.debug: 
+      var: _networks
+
 # DEVICES (Network)
   - name: Query Cisco Meraki devices
     cisco.meraki.meraki_device:
@@ -27,7 +40,7 @@
       validate_certs: "{{ validate_certs }}"
       auth_key: "{{ auth_key }}"
       org_name: "{{ org_name }}"
-      net_name: "{{ net_name }}"
+      #net_name: "{{ net_name }}"
       state: query
     register: _devices
 
