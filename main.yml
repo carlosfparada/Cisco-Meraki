@@ -4,10 +4,8 @@
   hosts: localhost
   connection: local
   gather_facts: false
-  
+  vars_files: main.yml
   tasks:
-  
-  - include_vars: main.yml
 
 # DEVICES (Network)
   - name: Query Cisco Meraki devices
