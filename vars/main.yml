@@ -12,11 +12,21 @@ validate_certs: no
 # wireless_serial: "Q2MD-BHHS-5FDL"
 
 # Red Hat Org
-#meraki_host: "{{ cisco_meraki_endpoint | default('('n149.meraki.com'.meraki.com') }}"
+# #meraki_host: "{{ cisco_meraki_endpoint | default('('n149.meraki.com'.meraki.com') }}"
+# meraki_host: "n149.meraki.com"
+# org_name: "Red Hat"
+# net_name: "Ansible-Net"
+# # net_name: "Acme-Office"
+# # net_name: "Acme-Branch"
+# switch_serial: "Q2MD-9PJD-E9L7"
+# wireless_serial: "Q2MD-BHHS-5FDL"
+
+# Red Hat Org
+switch_serial: "Q2MD-9PJD-E9L7"
+# wireless_serial: "Q2MD-BHHS-5FDL"#meraki_host: "{{ cisco_meraki_endpoint | default('('n149.meraki.com'.meraki.com') }}"
 meraki_host: "n149.meraki.com"
-org_name: "Red Hat"
-net_name: "Ansible-Net"
+org_name: "Cisco Meraki Platform"
+net_name: "Datacenter-CA"
 # net_name: "Acme-Office"
 # net_name: "Acme-Branch"
-switch_serial: "Q2MD-9PJD-E9L7"
-wireless_serial: "Q2MD-BHHS-5FDL"
+# 
