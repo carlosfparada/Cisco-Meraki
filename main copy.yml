@@ -1,0 +1,309 @@
+---
+
+- name: Cisco Meraki
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files: vars/main.yml
+  tasks:
+
+# ORGANIZATIONS
+  - name: Query Cisco Meraki organizations
+    cisco.meraki.meraki_organization:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      state: query
+    register: _organizations
+
+  - name: Debug organizations
+    ansible.builtin.debug: 
+      var: _organizations
+
+# NETWORKS
+  - name: Query Cisco Meraki networks
+    cisco.meraki.meraki_network:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_id: "646829496481089917"
+      state: query
+    register: _networks
+
+  - name: Debug networks
+    ansible.builtin.debug: 
+      var: _networks
+
+# DEVICES (Network)
+  - name: Query Cisco Meraki devices
+    cisco.meraki.meraki_device:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _devices
+
+  - name: Debug devices
+    ansible.builtin.debug: 
+      var: _devices
+
+  - name: Add Cisco Meraki device into a network
+    cisco.meraki.meraki_device:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      serial: "{{ switch_serial }}"
+      state: present
+
+# Route/Policy (MX)
+  # firerwall services
+  - name: Allow Cisco Meraki Firewall ICMP services
+    cisco.meraki.meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      access: restricted
+      service: ICMP
+      allowed_ips:
+        - 192.0.1.1
+        - 192.0.1.2
+
+  - name: Query Cisco Meraki Firewall services
+    cisco.meraki.meraki_firewalled_services:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _fw_services
+
+  - name: Debug fw_services
+    ansible.builtin.debug: 
+      var: _fw_services
+
+  # firewall rules
+  - name: Allow Cisco Meraki Firewall MX rule
+    cisco.meraki.meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      rules:
+        - comment: test rule
+          policy: allow
+          protocol: tcp
+          src_port: any
+          src_cidr: any
+          dest_port: 80
+          dest_cidr: 192.168.2.0/24
+
+  - name: Query Cisco Meraki Firewall MX rule
+    cisco.meraki.meraki_mx_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _fw_mx
+
+  - name: Debug fw_mx
+    ansible.builtin.debug: 
+      var: _fw_mx
+
+  # NAT
+  - name: Set Cisco Meraki NAT MX rule
+    cisco.meraki.meraki_mx_nat:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      one_to_many:
+      - public_ip: 1.1.1.1
+        uplink: internet1
+        port_rules:
+          - name: Test rule
+            protocol: tcp
+            public_port: 10
+            local_ip: 192.168.0.1
+            local_port: 11
+            allowed_ips:
+              - any
+
+  - name: Query Cisco Meraki NAT MX rule
+    cisco.meraki.meraki_mx_nat:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _nat_mx
+
+  - name: Debug nat_mx
+    ansible.builtin.debug: 
+      var: _nat_mx
+      
+# ACCESS POINTS (MR) 
+  # firewall rules
+  - name: Allow Cisco Meraki Firewall MR rule
+    cisco.meraki.meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      number: 1
+      rules:
+        - comment: test rule
+          policy: allow
+          protocol: tcp
+          dest_port: 80
+          dest_cidr: 192.168.1.0/24
+
+  - name: Query Cisco Meraki Firewall MR rule
+    cisco.meraki.meraki_mr_l3_firewall:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      number: 1
+      state: query
+    register: _fw_mr
+
+  - name: Debug fw_mr
+    ansible.builtin.debug: 
+      var: _fw_mr
+
+  # SSID
+  - name: Set Cisco Meraki MR SSID
+    cisco.meraki.meraki_mr_ssid:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      name: MySSID
+      enabled: true
+
+  - name: Query Cisco Meraki MR SSIDs
+    cisco.meraki.meraki_mr_ssid:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _ssid_mr
+
+  - name: Debug ssid_mr
+    ansible.builtin.debug: 
+      var: _ssid_mr
+
+# SWITCH (MS)
+  # Port/VLAN
+  - name: Set Cisco Meraki MS port with VLAN access
+    cisco.meraki.meraki_ms_switchport:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: present
+      number: 7
+      enabled: true
+      name: Test Port
+      type: access
+      vlan: 10
+
+  - name: Query Cisco Meraki MS ports
+    cisco.meraki.meraki_ms_switchport:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: query
+    register: _ports_ms
+
+  - name: Debug ports_ms
+    ansible.builtin.debug: 
+      var: _ports_ms
+
+  # L3 interface
+  - name: Set Cisco Meraki MS L3 Interface
+    cisco.meraki.meraki_ms_l3_interface:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: present
+      name: "Test L3 interface 2"
+      subnet: "192.168.3.0/24"
+      interface_ip: "192.168.3.2"
+      default_gateway: "192.168.3.1"
+      vlan_id: 11
+
+  - name: Query Cisco Meraki MS L3 Interfaces
+    cisco.meraki.meraki_ms_l3_interface:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      serial: "Q2GW-2CPC-JCYZ"
+      state: query
+    register: _l3_interfaces
+
+  - name: Debug l3_interfaces
+    ansible.builtin.debug: 
+      var: _l3_interfaces
+
+  # Access List
+  - name: Set Cisco Meraki MS Access List
+    cisco.meraki.meraki_ms_access_list:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: present
+      rules:
+        - comment: Fake rule
+          policy: allow
+          ip_version: ipv4
+          protocol: udp
+          src_cidr: 192.0.1.0/24
+          src_port: "4242"
+          dst_cidr: 1.2.3.4/32
+          dst_port: "80"
+          vlan: "100"
+
+  - name: Query Cisco Meraki MS Access Lists
+    cisco.meraki.meraki_ms_access_list:
+      host: "{{ meraki_host }}"
+      validate_certs: "{{ validate_certs }}"
+      auth_key: "{{ auth_key }}"
+      org_name: "{{ org_name }}"
+      net_name: "{{ net_name }}"
+      state: query
+    register: _access_lists
+
+  - name: Debug access_lists
+    ansible.builtin.debug: 
+      var: _access_lists
