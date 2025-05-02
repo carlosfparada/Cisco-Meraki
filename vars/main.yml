@@ -13,7 +13,7 @@ validate_certs: no
 
 # Red Hat Org
 #meraki_host: "{{ cisco_meraki_endpoint | default('('n149.meraki.com'.meraki.com') }}"
-meraki_host: "n149.meraki.com'.meraki.com"
+meraki_host: "n149.meraki.com"
 org_name: "Red Hat"
 net_name: "Ansible-Net"
 # net_name: "Acme-Office"

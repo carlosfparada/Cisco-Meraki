@@ -8,7 +8,7 @@
   tasks:
 
 # ORGANIZATIONS
-  - name: Query Cisco Meraki devices
+  - name: Query Cisco Meraki organizations
     cisco.meraki.meraki_organization:
       host: "{{ meraki_host }}"
       validate_certs: "{{ validate_certs }}"
