@@ -2,31 +2,24 @@
 
 auth_key: "2379ee7951ba4597cdd940ef858f64659cfb4ecb"
 validate_certs: no
-# meraki_hosestt: "{{ cisco_meraki_endpoint | default('api.meraki.com') }}"
+# meraki_host: "api.meraki.com"
+
+dnac_host: "{{ cisco_dnac_endpoint | default('sandboxdnac2.cisco.com') }}"
+dnac_username: "{{ cisco_dnac_user | default('devnetuser') }}"
+dnac_password: "{{ cisco_dnac_password | default('Cisco123!') }}"
 
 # DevNet Sandbox Org
-# meraki_host: "{{ cisco_meraki_endpoint | default('n149.meraki.com') }}"
+# meraki_host: "n149.meraki.com"
 # org_name: "DevNet Sandbox"
 # net_name: "DevNet Sandbox ALWAYS ON"
 # switch_serial: "Q2MD-9PJD-E9L7"
 # wireless_serial: "Q2MD-BHHS-5FDL"
 
 # Red Hat Org
-# #meraki_host: "{{ cisco_meraki_endpoint | default('('n149.meraki.com'.meraki.com') }}"
-# meraki_host: "n149.meraki.com"
-# org_name: "Red Hat"
-# net_name: "Ansible-Net"
-# # net_name: "Acme-Office"
-# # net_name: "Acme-Branch"
-# switch_serial: "Q2MD-9PJD-E9L7"
-# wireless_serial: "Q2MD-BHHS-5FDL"
-
-# Red Hat Org
-switch_serial: "Q2MD-9PJD-E9L7"
-# wireless_serial: "Q2MD-BHHS-5FDL"#meraki_host: "{{ cisco_meraki_endpoint | default('('n149.meraki.com'.meraki.com') }}"
-meraki_host: "n149.meraki.com"
-org_name: "Cisco Meraki Platform"
-net_name: "Datacenter-CA"
+meraki_host: "n166.meraki.com"
+org_name: "Red Hat"
+net_name: "Ansible-Net"
 # net_name: "Acme-Office"
 # net_name: "Acme-Branch"
-# 
+switch_serial: "Q2MD-9PJD-E9L7"
+wireless_serial: "Q2MD-BHHS-5FDL"
